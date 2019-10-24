@@ -1,9 +1,12 @@
+% In this script, we solve the semidefinite formulation of the Performance
+% Estimation Problem (PEP) for the NoLips/Bregman Gradient algorithm.
+
 clear all; clc;
 
 %% Parameters of the problem
 N       = 3;            % number of iterations 
 L       = 1;            % h-smoothness constant
-gamma   = @(k)(1/L);    % step size
+lambda  = 0.8/L;    % step size
 R       = 1;            % initial radius
 
 % solver parameters
@@ -41,7 +44,7 @@ h                          = f;
 
 % encoding the NoLips algorithm
 for i = 1:N
-    s(2+i,:) = s(1+i,:) - gamma(i) * g(1+i,:);
+    s(2+i,:) = s(1+i,:) - lambda * g(1+i,:);
 end    
 
 % for convenience, define encoding vectors corresponding to the optimum x*
@@ -58,7 +61,7 @@ F = sdpvar(dimF,1);     % F is  dimF x1
 H = sdpvar(dimF,1);     % H is  dimF x1
 
 % initial radius constraint
-constraint = constraint + ( L*(hs-hk(1,:))*H - (fs - fk(1,:)) * F  - (L * sk(1,:) - gk(1,:))*G*(xs-xk(1,:))'<= R);
+constraint = constraint + ( L*(hs-hk(1,:))*H - L*sk(1,:)*G*(xs-xk(1,:))'<= R);
 
 % convexity constraints
 for i = 1:nbPts         % must be used for xs,x0,...,xN 
@@ -82,7 +85,7 @@ solverDetails=optimize(constraint,-obj,solver_opt);
 
 fprintf("\nProblem info: %s\n\n", solverDetails.info)
 fprintf("PEP value:          %d\n", double(obj))
-fprintf("theoretical value:  %d\n", L*R / N)
+fprintf("theoretical value:  %d\n", R / lambda / N)
 
 
 
