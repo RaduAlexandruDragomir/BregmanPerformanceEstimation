@@ -7,7 +7,7 @@ clear all; clc;
 % Note that the example will be displayed in a plot only 
 % for N = 1,2 (because it will be in dimension 2 and 3 respectively)
 
-N       = 2;            % number of iterations 
+N       = 1;            % number of iterations 
 L       = 1;            % h-smoothness constant
 lambda  = 1/L;    % step size
 R       = 1;            % initial radius
@@ -94,38 +94,22 @@ constraint = constraint + ((fk(end,:)-fs)*F >= R / lambda /N);
 % to get a "worst function in the world" type behavior
 for i = 2:N+1
     for j = i+1:N+2
-%         constraint = constraint + ( g(i,:)*G*(g(j,:))' <= orth_const);
-%         constraint = constraint + ( -(g(i,:))*G*(g(j,:))' <= orth_const);
-        constraint = constraint + (g(i,:)*G*(g(j,:))' == 0);
+       constraint = constraint + (g(i,:)*G*(g(j,:))' == 0);
     end
     
-%     dx1 = x(i,:); dx2 = x(i,:) - x(i+1,:);
-%     constraint = constraint + ( dx1*G*dx2' <= orth_const);
-%     constraint = constraint + ( -dx1*G*dx2' <= orth_const);
+   
 end
 
-
-% we also can impose this normalization constraint 
-% constraint = constraint + (x(2,:)*G*x(2,:)' == N+1);
+% we also can impose this normalization constraint in order to get
+% " round coordinates " (falcutative)
+constraint = constraint + (x(2,:)*G*x(2,:)' == N+1);
+constraint = constraint + (x(3,:)*G*x(3,:)' == N);
 
 % we search for the minimal trace solution, hopefully leading to a low rank
 obj = trace(G) ;
 
 solver_opt = sdpsettings('solver','mosek','verbose',verbose,'mosek.MSK_DPAR_INTPNT_CO_TOL_PFEAS',tolerance);
 solverDetails=optimize(constraint, obj,solver_opt);
-
-% (optional) doing a permutation to try to have triangular gradients
-% permut_grads = false;
-% 
-% if permut_grads
-%     permut = eye(dimG);
-%     permut(1:N+1, N+2:2*N+2) =  eye(N+1);
-%     permut(N+2:2*N+2, 1:N+1) =  eye(N+1);
-%     permut(end,end) = 1;
-%     G = permut' * G * permut
-% else
-%     permut = eye(dimG);
-% end
 
 %% we perform QR decomposition to recover P from G = P' * P 
 [V,D]           =eig(double(G));
@@ -136,29 +120,33 @@ new_D=diag(eigenV); [~,P]=qr(sqrt(new_D)*V.');
 
 P=P(1:sum(eigenV>0),:);
 
-% % rotating on the basis given by grad d(x1)
-% gr_d = (P * (g' - s'));
-% grad_dx1 = gr_d(:,2);
-% u1 = grad_dx1 / norm(grad_dx1);
-% 
-% if N == 1
-%     u1 = grad_dx1 / norm(grad_dx1);
-%     rotation = [u1(1) -u1(2);
-%                 u1(2) u1(1)];     
-%             
-%     P = rotation' * P;        
-% elseif N == 2
-%     u1 = P * g(2,:)';
-%     u2 = P * g(3,:)'; 
-%     u3 = cross(u1,u2);
-%     
-%     u1 = u1 / norm(u1);
-%     u2 = u2 / norm(u2);
-%     u3 = u3 / norm(u3);
-%     rotation = [u1 u2 u3];
-% 
-%     P = rotation' * P;
-% end
+dim = size(P,1);
+
+% for a more convenient representation, we rotate P
+% on the basis given by grad d(x1)
+gr_d = (P * (L*s' - g'));
+grad_dx1 = gr_d(:,2);
+u1 = grad_dx1 / norm(grad_dx1);
+
+if dim == 2
+    
+    rotation = [u1(2) -u1(1);
+                u1(1) u1(2)];     
+            
+    P = rotation * P;        
+elseif dim == 3
+    
+    u1 = P * g(2,:)';
+    u2 = P * g(3,:)'; 
+    u3 = cross(u1,u2);
+    
+    u1 = u1 / norm(u1);
+    u2 = u2 / norm(u2);
+    u3 = u3 / norm(u3);
+    rotation = [u1 u2 u3];
+
+    P = rotation' * P;
+end
         
 % we can now recover the problem data thanks to P and the encoding vectors
 X  = P * x'; % x_i
