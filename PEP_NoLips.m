@@ -6,13 +6,12 @@ clear all; clc;
 %% Parameters of the problem
 N       = 3;            % number of iterations 
 L       = 1;            % h-smoothness constant
-lambda  = 0.8/L;    % step size
+lambda  = 1/L;    % step size
 R       = 1;            % initial radius
 
 % solver parameters
 verbose     = 1;
 tolerance   = 1e-8;
-tolerance2   = 1e-4;
 
 %% Setting up the problem variables
 
@@ -61,7 +60,7 @@ F = sdpvar(dimF,1);     % F is  dimF x1
 H = sdpvar(dimF,1);     % H is  dimF x1
 
 % initial radius constraint
-constraint = constraint + ( L*(hs-hk(1,:))*H - L*sk(1,:)*G*(xs-xk(1,:))'<= R);
+constraint = constraint + ( (hs-hk(1,:))*H - sk(1,:)*G*(xs-xk(1,:))'<= R);
 
 % convexity constraints
 for i = 1:nbPts         % must be used for xs,x0,...,xN 
