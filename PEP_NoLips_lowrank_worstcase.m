@@ -155,4 +155,8 @@ Gh = P * s'; % grad h(x_i)
 
 Gd = L * Gh - Gf; % grad d(x_i)
 
+% if the dimension is 1 or 2, we can plot the functions
+if dim == 1 || dim == 2
+    plot_discrete_functions(X,Gf,Gh,F,H)
+end
 
