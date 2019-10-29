@@ -4,7 +4,7 @@
 clear all; clc;
 
 %% Parameters of the problem
-N       = 3;            % number of iterations 
+N       = 100;            % number of iterations 
 L       = 1;            % h-smoothness constant
 lambda  = 1/L;    % step size
 R       = 1;            % initial radius
@@ -84,8 +84,11 @@ solverDetails=optimize(constraint,-obj,solver_opt);
 
 fprintf("\nProblem info: %s\n\n", solverDetails.info)
 fprintf("PEP value:          %d\n", double(obj))
-fprintf("theoretical value:  %d\n", R / lambda / N)
 
+theo_value = R / lambda / N;
+rel_error = abs(theo_value - double(obj))/theo_value;
+fprintf("theoretical value:  %d\n", theo_value)
+fprintf("Relative error   :  %d\n", rel_error);
 
 
 
