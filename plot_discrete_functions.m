@@ -3,7 +3,14 @@ function plot_discrete_functions(X,Gf,Gh,F,H)
 %     Plots the 2d-discrete representation of an instance of PEP for NoLips.
 %     Shows the points x_i, as well as the (sub)gradients of f and h
 %     
-%     
+%     Arguments
+%         - X : array of size (n_pts, dim) storing the iterates x_i
+%         - Gf: array of size (n_pts, dim) storing the gradients of f at the x_i's
+%         - Gh: array of size (n_pts, dim) storing the gradients of h at the x_i's
+%         - F : array of size (n_pts) storing the values of f
+%         - H : array of size (n_pts) storing the values of h
+% 
+
     n_pts = size(X,2);
     dim = size(X,1);
     

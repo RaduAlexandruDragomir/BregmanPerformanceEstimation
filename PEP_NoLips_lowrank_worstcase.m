@@ -1,4 +1,4 @@
-% Script for examining the worst-case function for the NoLips/Bregman gradient
+% Script for examining the worst-case functions for the NoLips/Bregman gradient
 % algorithm. We use the PEP formulation along with a rank minimization heuristic.
 
 clear all; clc;
@@ -42,13 +42,6 @@ s(2,2*N+3)           = 1;
 
 f(2:nbPts, 1:nbPts-1)      = eye(nbPts-1);
 h                          = f;
-
-% the algorithm
-
-for i = 1:N
-    s(2+i,:) = s(1+i,:) - gamma(i) * g(1+i,:);
-end
-
 
 % encoding the NoLips algorithm
 for i = 1:N
