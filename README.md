@@ -12,6 +12,10 @@ The files in the [PESTO](PESTO/) folder require the Performance Estimation Toolb
 
 ## List of files
 
+- [`PEP_NoLips.m`](PEP_NoLips.m) solves the Performance Estimation Problem (PEP) for computing the worst-case convergence rate of the NoLips/Bregman Gradient algorithm as described in [1, Section 4].
+- [`PEP_NoLips_lowrank_worstcase.m`](PEP_NoLips_lowrank_worstcase.m) searches for particular solutions of the PEP, which are low-rank and where the gradients $\nabla f(x_i)$ are orthogonal, as described in [1, Section 4.5.4].
+- [`plot_discrete_functions.m`](plot_discrete_functions.m) defines the function used to display the worst-case instances in dimension 1 or 2.
+
 ## Authors
 
 - Radu-Alexandru Dragomir
