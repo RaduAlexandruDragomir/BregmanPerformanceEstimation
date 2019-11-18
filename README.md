@@ -13,8 +13,14 @@ The files in the [PESTO](PESTO/) folder require the Performance Estimation Toolb
 ## List of files
 
 - [`PEP_NoLips.m`](PEP_NoLips.m) solves the Performance Estimation Problem (PEP) for computing the worst-case convergence rate of the NoLips/Bregman Gradient algorithm as described in [1, Section 4].
-- [`PEP_NoLips_lowrank_worstcase.m`](PEP_NoLips_lowrank_worstcase.m) implements the procedure used to discover the general worst-case functions used for proving the lower bound for Bregman methods in [1, Section 3]. This is done by searching particular solutions of the PEP which are low-rank and for which the gradients of the objective at the iterates are constrained to be orthogonal, as described in [1, Section 4.5.4]. 
+- [`PEP_NoLips_lowrank_worstcase.m`](PEP_NoLips_lowrank_worstcase.m) implements the procedure used to discover the general worst-case functions by searching particular solutions of the PEP, as described in [1, Section 4.5.4]. 
 - [`plot_discrete_functions.m`](plot_discrete_functions.m) defines the function used to display the worst-case instances in dimension 1 or 2.
+- [`PESTO/`](PESTO/) provides implementation of PEPs for several Bregman methods using the [PESTO](https://github.com/AdrienTaylor/Performance-Estimation-Toolbox) toolbox:
+    - [`PESTO/NoLips.m`](PESTO/NoLips.m) for the basic NoLips algorithm
+    - [`PESTO/NoLips_takeII.m`](PESTO/NoLips_takeII.m) for analyzing a different convergence criterion for NoLips as in [1, Section 4.5.2]
+    - [`PESTO/BregmanProximalPoint.m`](PESTO/BregmanProximalPoint.m) for the Bregman proximal point method
+    - [`PESTO/IGA.m`](PESTO/IGA.m) for the Improved Interior Gradient Algorithm (IGA)
+    - [`PESTO/IGA.m`](PESTO/IGA.m) for IGA with no constraints [1, Section 4.5.3]
 
 ## Authors
 
