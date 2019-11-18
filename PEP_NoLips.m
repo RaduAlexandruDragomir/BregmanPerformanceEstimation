@@ -4,7 +4,7 @@
 clear all; clc;
 
 %% Parameters of the problem
-N       = 100;            % number of iterations 
+N       = 3;            % number of iterations 
 L       = 1;            % h-smoothness constant
 lambda  = 1/L;    % step size
 R       = 1;            % initial radius

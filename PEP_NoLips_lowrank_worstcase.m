@@ -6,7 +6,6 @@ clear all; clc;
 %% Parameters of the problem
 % Note that the example will be displayed in a plot only 
 % for N = 1,2 (because it will be in dimension 2 and 3 respectively)
-
 N       = 1;            % number of iterations 
 L       = 1;            % h-smoothness constant
 lambda  = 1/L;    % step size
@@ -101,7 +100,7 @@ for i = 2:N+1
 end
 
 % we also can impose this normalization constraint in order to get
-% " round coordinates " (falcutative)
+% "  coordinates " (falcutative)
 constraint = constraint + (x(2,:)*G*x(2,:)' == N+1);
 constraint = constraint + (x(3,:)*G*x(3,:)' == N);
 
@@ -133,19 +132,7 @@ if dim == 2
     rotation = [u1(2) -u1(1);
                 u1(1) u1(2)];     
             
-    P = rotation * P;        
-elseif dim == 3
-    
-    u1 = P * g(2,:)';
-    u2 = P * g(3,:)'; 
-    u3 = cross(u1,u2);
-    
-    u1 = u1 / norm(u1);
-    u2 = u2 / norm(u2);
-    u3 = u3 / norm(u3);
-    rotation = [u1 u2 u3];
-
-    P = rotation' * P;
+    P = rotation * P;
 end
         
 % we can now recover the problem data thanks to P and the encoding vectors
