@@ -7,7 +7,7 @@ This code provides the MATLAB implementation of the computer-aided analysis of B
 ## Getting Started
 
 This code requires [YALMIP](https://yalmip.github.io/) along with a suitable SDP solver (e.g., Sedumi, SDPT3, Mosek).
-The files in the [PESTO](PESTO/) folder require the Performance Estimation Toolbox (PESTO(https://github.com/AdrienTaylor/Performance-Estimation-Toolbox))
+The files in the [PESTO](PESTO/) folder require the Performance Estimation Toolbox ([PESTO](https://github.com/AdrienTaylor/Performance-Estimation-Toolbox))
 
 
 ## List of files
