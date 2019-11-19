@@ -21,6 +21,9 @@ The files in the [PESTO](PESTO/) folder require the Performance Estimation Toolb
     - [`PESTO/BregmanProximalPoint.m`](PESTO/BregmanProximalPoint.m) for the Bregman proximal point method
     - [`PESTO/IGA.m`](PESTO/IGA.m) for the Improved Interior Gradient Algorithm (IGA)
     - [`PESTO/IGA.m`](PESTO/IGA.m) for IGA with no constraints [1, Section 4.5.3]
+- [`symbolic_verifications/`](symbolic_verifications/) provides the symbolic verifications of the convergence rate proofs in [1]:
+    - [`symbolic_verifications/NoLips_FunctionValues.nb`](symbolic_verifications/NoLips_FunctionValues.nb) for Theorem 1
+    - [`symbolic_verifications/NoLips_Gradients.nb`](symbolic_verifications/NoLips_Gradients.nb) for Proposition 4 		
 
 ## Authors
 
