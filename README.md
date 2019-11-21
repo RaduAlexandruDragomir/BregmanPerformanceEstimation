@@ -2,12 +2,14 @@
 
 This code provides the MATLAB implementation of the computer-aided analysis of Bregman methods, as described in the paper:
 
-> [1] R.A. Dragomir, A. Taylor, A. d'Aspremont, J. Bolte, "Optimal Complexity and Certification of Bregman First-OrderMethods" arXiv, 2019.
+> [1] R.A. Dragomir, A. Taylor, A. d'Aspremont, J. Bolte, "Optimal Complexity and Certification of Bregman First-OrderMethods" arXiv preprint arXiv:1911.08510, 2019.
 
 ## Getting Started
 
 This code requires [YALMIP](https://yalmip.github.io/) along with a suitable SDP solver (e.g., Sedumi, SDPT3, Mosek).
 The files in the [PESTO](PESTO/) folder require the Performance Estimation Toolbox ([PESTO](https://github.com/AdrienTaylor/Performance-Estimation-Toolbox))
+
+For getting started, the basic performance estimation problem (PEP) for computing the worst-case performance of the NoLips/Bregman Gradient algorithm is provided in the script [`PEP_NoLips.m`](PEP_NoLips.m).
 
 
 ## List of files
