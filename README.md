@@ -29,7 +29,7 @@ For getting started, the basic performance estimation problem (PEP) for computin
 
 ## Authors
 
-- Radu-Alexandru Dragomir
+- [**Radu-Alexandru Dragomir**](https://www.di.ens.fr/radu-alexandru.dragomir/)
 - [**Adrien Taylor**](http://www.di.ens.fr/~ataylor/)
 - [**Alexandre d'Aspremont**](https://www.di.ens.fr/~aspremon/)
 - [**Jérôme Bolte**](https://www.tse-fr.eu/fr/people/jerome-bolte)
